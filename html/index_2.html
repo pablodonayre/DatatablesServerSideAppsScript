@@ -1,0 +1,56 @@
+<html>
+    <head>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    </head>
+    <body>
+        <div class="container" id="">
+        <br>
+        <h1>prueba</h1>
+        </div>
+    </body>
+    <script>
+        $(document).ready( function(){
+        
+        
+            $.ajax({
+                        url: "https://script.google.com/macros/s/AKfycbxGxm61aU60eM2xuWy403wE4yq7ZFl3n5Rg0ZQKHK7Zqzfm-cQ/exec",
+                        method: "GET",
+                        dataType: "json",
+                        //data: json_1,
+                        data: {
+                                email : 'email1',//'123@gmailc.om'//$('#user_E800_email').val();
+                                //data.email = '',//$('#user_E800_email').val();
+                                first_name : '',//$('#user_E803_first_name').val();
+                                last_name : '',//$('#user_E806_last_name').val();
+                                employee_id : '',//$('#user_E809_employee_id').val();
+                                status : '',//$('#user_E812_status').val();
+                                radioEmail : 'C',//$('#user_E801_radioEmail').val();
+                                radioFirstname : 'C',//$('#user_E804_radioFirstname').val();
+                                radioLastname : 'C',//$('#user_E807_radioLastname').val();
+                                radioEmployee_id : 'C',//$('#user_E810_radioEmployee_id').val();
+                                radioStatus : 'C',//$('#user_E813_radioStatus').val();
+                                radioEmail2 : 'a',//$('#user_E802_radioEmail2').val();
+                                radioFirstname2 : 'a',//$('#user_E805_radioFirstname2').val();
+                                radioLastname2 : 'a',//$('#user_E808_radioLastname2').val();
+                                radioEmployee_id2 : 'a',//$('#user_E811_radioEmployee_id2').val();
+                                radioStatus2 : 'a',//$('#user_E814_radioStatus2').val();
+                                draw: null,
+                                start: 0,
+                                length:10,
+                                order:""
+                                },
+                        success: function (response) {
+                            //google.script.run.withSuccessHandler(resultProcess).getScriptUrl();
+                            //resultProcess(response);
+                            console.log('response',response);
+                        }
+                    });
+                    
+        })
+    </script>
+    
+</html>

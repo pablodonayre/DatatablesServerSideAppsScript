@@ -1,0 +1,10 @@
+{
+  "timeZone": "America/Indiana/Indianapolis",
+  "dependencies": {
+  },
+  "webapp": {
+    "access": "ANYONE",
+    "executeAs": "USER_ACCESSING"
+  },
+  "exceptionLogging": "STACKDRIVER"
+}
