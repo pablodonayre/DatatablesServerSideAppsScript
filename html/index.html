@@ -5,15 +5,32 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+        <style>
+            .accordion-toggle:after {
+                /* symbol for "opening" panels */
+                font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+                content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+                float: right;        /* adjust as needed */
+                color: grey;         /* adjust as needed */
+            }
+            .accordion-toggle.collapsed:after {
+                /* symbol for "collapsed" panels */
+                content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+            }
+        </style>
     </head>
     <body>
         <div class="container" id="">
         <br>
-        <div class="panel panel-default" id="advance_filter" >
+        <div class=" pull-right">
+            <a id="B100_list_filter" href="javascript:void(0)" class="btn btn-default" value="off">Filter Off</a>       
+        </div>
+        <br><br>
+        <div class="panel panel-default" id="advance_filter" style="display:none;" >
             <div class="panel-heading">
-                <h3 class="panel-title" >Advanced Filter : </h3>
+                <h3 class="panel-title accordion-toggle" data-toggle="collapse" href="#collapse1">Advanced Filter : </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body panel-collapse collapse in" id="collapse1">
                 <form id="form-filter" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -193,6 +210,7 @@
                     /*"pagingType": "full",*/
 //                     "pagingType": "input",
 
+                    "bFilter": false,
                     "processing": true, //Feature control the processing indicator.
                     "serverSide": true, //Feature control DataTables' server-side processing mode.
 
@@ -208,7 +226,7 @@
                     // Load data for the table's content from an Ajax source
                     "ajax": {
                             "url": "https://script.google.com/macros/s/AKfycbxGxm61aU60eM2xuWy403wE4yq7ZFl3n5Rg0ZQKHK7Zqzfm-cQ/exec",
-                            "type": "GET",
+                            "type": "POST",
                             "data": function ( data ) {
                                 data.email = $('#user_E800_email').val();
                                 data.first_name = $('#user_E803_first_name').val();
@@ -322,7 +340,30 @@
 //                 $('.buttons-pdf').addClass("donayreButton").removeClass('buttons-pdf dt-button buttons-html5');
 
             //}
-            
+            $("#B100_list_filter").click(function () {
+                    if ($("#B100_list_filter").attr("value") === "off") {
+                        $("#B100_list_filter").attr("value", "on");
+                        $("#B100_list_filter").html("Filter On");
+                        $('#B100_list_filter').removeClass('btn btn-default');
+                        $('#B100_list_filter').addClass('btn btn-primary');
+                        $("#B100_list_filter").blur();
+                        $("#advance_filter").show();
+                    } else {
+                        //$('.table-sorted input[type="text"]').val('');
+                        //oTable.columns().search("").draw();
+                        $("#B100_list_filter").attr("value", "off");
+                        $("#B100_list_filter").html("Filter Off");
+                        $('#B100_list_filter').removeClass('btn btn-primary');
+                        $('#B100_list_filter').addClass('btn btn-default');
+                        $("#B100_list_filter").blur();
+                        $("#advance_filter").hide();
+                        $('#form-filter')[0].reset();
+                        oTable.ajax.reload();
+                    }
+                    
+                    
+                });
+                
             $('#B114_btn_filter').click(function(){ //button filter event click
                 $('#B114_btn_filter').blur();
                 oTable.ajax.reload();  //just reload table
